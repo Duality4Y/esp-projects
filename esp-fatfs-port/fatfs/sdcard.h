@@ -31,22 +31,22 @@
 #define CMD55   (55)        /* APP_CMD */
 #define CMD58   (58)        /* READ_OCR */
 
-/* ChipSelect control. */
-#define HIGH (1)
-#define LOW (0)
-#define _CS_GPIO 15
-#define CS_OUTPUT (PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U, FUNC_GPIO_CS_GPIO))
-#define SET_CS(X) (GPIO_OUTPUT_SET(GPIO_ID_PIN(_CS_GPIO), X))
+/* MMC card type flags (MMC_GET_TYPE) */
+#define CT_MMC      0x01        /* MMC ver 3 */
+#define CT_SD1      0x02        /* SD ver 1 */
+#define CT_SD2      0x04        /* SD ver 2 */
+#define CT_SDC      (CT_SD1|CT_SD2) /* SD */
+#define CT_BLOCK    0x08        /* Block addressing */
 
 static DSTATUS stat = STA_NOINIT; /* Disk status */
 
 static BYTE CardType;
 
-int MMC_disk_status(void);
-int MMC_disk_initialize(void);
-int MMC_disk_read(BYTE*, DWORD, UINT);
-int MMC_disk_write(const BYTE*, DWORD, UINT);
-int MMC_disk_ioctl(BYTE, void*);
+DSTATUS MMC_disk_status(BYTE);
+DSTATUS MMC_disk_initialize(BYTE);
+DRESULT MMC_disk_read(BYTE, BYTE*, DWORD, BYTE);
+DRESULT MMC_disk_write(BYTE, const BYTE*, DWORD, BYTE);
+DRESULT MMC_disk_ioctl(BYTE, BYTE, void*);
 
 static int wait_reply(void);
 static void deselect(void);

@@ -16,6 +16,7 @@ static void ICACHE_FLASH_ATTR
 
 user_procTask(os_event_t *events)
 {
+    os_printf("Hello World!.\n");
     os_delay_us(10);
 }
 

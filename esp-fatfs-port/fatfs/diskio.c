@@ -32,11 +32,7 @@ DSTATUS disk_status (
 		return stat;
 
 	case MMC :
-		result = MMC_disk_status();
-
-		// translate the reslut code here
-
-		return stat;
+		return MMC_disk_status(pdrv);
 
 	case USB :
 		result = USB_disk_status();
@@ -70,11 +66,7 @@ DSTATUS disk_initialize (
 		return stat;
 
 	case MMC :
-		result = MMC_disk_initialize();
-
-		// translate the reslut code here
-
-		return stat;
+		return MMC_disk_initialize(pdrv);
 
 	case USB :
 		result = USB_disk_initialize();
@@ -115,11 +107,7 @@ DRESULT disk_read (
 	case MMC :
 		// translate the arguments here
 
-		result = MMC_disk_read(buff, sector, count);
-
-		// translate the reslut code here
-
-		return res;
+		return MMC_disk_read(pdrv, buff, sector, count);
 
 	case USB :
 		// translate the arguments here
@@ -164,11 +152,7 @@ DRESULT disk_write (
 	case MMC :
 		// translate the arguments here
 
-		result = MMC_disk_write(buff, sector, count);
-
-		// translate the reslut code here
-
-		return res;
+		return MMC_disk_write(pdrv, buff, sector, count);
 
 	case USB :
 		// translate the arguments here
@@ -209,8 +193,7 @@ DRESULT disk_ioctl (
 	case MMC :
 
 		// Process of the command for the MMC/SD card
-		result = MMC_disk_ioctl(cmd, buff);
-		return res;
+		return  MMC_disk_ioctl(pdrv, cmd, buff);
 
 	case USB :
 
